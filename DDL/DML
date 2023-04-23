@@ -1,0 +1,41 @@
+CREATE DATABASE foreign_trading_system;
+CREATE TABLE customers (
+  customer_id INT PRIMARY KEY,
+  name VARCHAR(50),
+  address VARCHAR(100),
+  phone VARCHAR(20),
+  email VARCHAR(50)
+);
+
+CREATE TABLE orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  order_date DATE,
+  total_amount DECIMAL(10,2),
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+CREATE TABLE products (
+  product_id INT PRIMARY KEY,
+  name VARCHAR(50),
+  description VARCHAR(100),
+  price DECIMAL(10,2)
+);
+
+INSERT INTO customers (customer_id, name, address, phone, email)
+VALUES
+  (1, 'John Smith', '123 Main St., Anytown USA', '555-555-1212', 'johnsmith@email.com'),
+  (2, 'Jane Doe', '456 Elm St., Anycity USA', '555-555-1313', 'janedoe@email.com'),
+  (3, 'Bob Johnson', '789 Oak St., Anyvillage USA', '555-555-1414', 'bobjohnson@email.com');
+
+INSERT INTO orders (order_id, customer_id, order_date, total_amount)
+VALUES
+  (1, 1, '2022-01-01', 100.00),
+  (2, 2, '2022-01-02', 200.00),
+  (3, 3, '2022-01-03', 300.00);
+
+INSERT INTO products (product_id, name, description, price)
+VALUES
+  (1, 'Widget', 'A small gadget', 10.00),
+  (2, 'Gizmo', 'A larger gadget', 20.00),
+  (3, 'Thingamabob', 'A very large gadget', 30.00);
